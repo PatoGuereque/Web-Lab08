@@ -8,11 +8,13 @@ const clearData = () => {
   waitlist = [];
 };
 
-const reserveTable = (table: Table) => {
+const reserveTable = (table: Table): boolean => {
   if (reservations.length === 5) {
     waitlist.push(table);
+    return false;
   } else {
     reservations.push(table);
+    return true;
   }
 };
 

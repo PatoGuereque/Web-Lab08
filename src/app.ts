@@ -1,10 +1,35 @@
 import express from "express";
-import { port } from "./config";
+import morgan from "morgan";
+import tableRoute from "./routes/tables";
+import waitlistRoute from "./routes/waitlist";
+import path from "path";
 
 const app = express();
 
+/**
+ * Middlewares
+ */
+app.use(morgan("combined"));
+app.use(express.json());
+
+/**
+ * Routes
+ */
+app.use("/api", tableRoute);
+app.use("/api", waitlistRoute);
+
+/**
+ * Static content
+ */
+const staticFolder = path.join(__dirname, "../static");
 app.get("/", (_req, res) => {
-  res.send("Hello World");
+  res.sendFile(path.join(staticFolder, "index.html"));
 });
 
-app.listen(port);
+app.use(
+  express.static(staticFolder, {
+    extensions: ["html"],
+  })
+);
+
+export { app };
