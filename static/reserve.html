@@ -39,6 +39,19 @@
           </a>
         </div>
       </div>
+      <div class="alert alert-success" id="success-alert" style="display: none">
+        <strong>Reservación exitosa! </strong>
+      </div>
+      <div
+        class="alert alert-warning"
+        id="lleno-alert"
+        style="display: none; opacity: 500"
+      >
+        <strong
+          >Oops! Todas las mesas se encuentren reservadas, pero te hemos
+          agregado a la lista de espera.
+        </strong>
+      </div>
       <div class="row">
         <div class="col-lg-12">
           <!-- Reservation Page -->
@@ -77,7 +90,39 @@
       </footer>
     </div>
   </body>
-</html>
+  <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
+  <script type="text/javascript">
+    $("#success-alert").hide();
+    $("#lleno-alert").hide();
 
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
-<script type="text/javascript"></script>
+    $(".submit").on("click", (event) => {
+      event.preventDefault();
+
+      const newReservation = {
+        name: $("#reserve-name").val().trim(),
+        phone: $("#reserve-phone").val().trim(),
+        email: $("#reserve-email").val().trim(),
+      };
+
+      $.post("/api/tables", newReservation, (data) => {
+        if (data.reserved) {
+          $("#success-alert")
+            .fadeTo(3000, 500)
+            .slideUp(500, () => {
+              $("#success-alert").slideUp(500);
+            });
+        } else {
+          $("#lleno-alert")
+            .fadeTo(3000, 500)
+            .slideUp(500, () => {
+              $("#lleno-alert").slideUp(500);
+            });
+        }
+
+        $("#reserve-name").val("");
+        $("#reserve-phone").val("");
+        $("#reserve-email").val("");
+      });
+    });
+  </script>
+</html>

@@ -77,5 +77,56 @@
   </body>
 
   <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS LOADED FROM OUR SERVER -->
-  <script type="text/javascript"></script>
+  <script type="text/javascript">
+    const addTables = (tables, parent) => {
+      tables.forEach(({ name, email, phone }, i) => {
+        const listItem = $("<li class='list-group-item mt-4'>");
+
+        listItem.append(
+          $("<h2>").text("Mesa# " + (i + 1)),
+          $("<hr>"),
+          $("<h2>").text("Nombre: " + name),
+          $("<h2>").text("Email: " + email),
+          $("<h2>").text("Teléfono: " + phone)
+        );
+
+        parent.append(listItem);
+      });
+    };
+
+    const getTables = () => {
+      $.ajax({
+        url: "/api/tables",
+        method: "GET",
+      }).then((tables) => {
+        const tableList = $("#tableList");
+        addTables(tables, tableList);
+      });
+    };
+
+    const getWaitlist = () => {
+      $.ajax({
+        url: "/api/waitlisttables",
+        method: "GET",
+      }).then((tables) => {
+        const waitList = $("#waitList");
+        addTables(tables, waitList);
+      });
+    };
+
+    const clearTable = () => {
+      $.ajax({
+        url: "/api/clear",
+        method: "POST",
+      }).then(() => {
+        $("#waitList").empty();
+        $("#tableList").empty();
+      });
+    };
+
+    $("#clear").on("click", clearTable);
+
+    getTables();
+    getWaitlist();
+  </script>
 </html>

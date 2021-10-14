@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import tableRoute from "./routes/tables";
 import waitlistRoute from "./routes/waitlist";
+import clearRoute from "./routes/clear";
 import path from "path";
 
 const app = express();
@@ -11,12 +12,14 @@ const app = express();
  */
 app.use(morgan("combined"));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 /**
  * Routes
  */
 app.use("/api", tableRoute);
 app.use("/api", waitlistRoute);
+app.use("/api", clearRoute);
 
 /**
  * Static content

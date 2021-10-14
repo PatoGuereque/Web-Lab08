@@ -51,4 +51,18 @@
       </footer>
     </div>
   </body>
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript">
+    $("#MesasDisponibles").text("");
+
+    $.ajax({
+      url: "/api/tables",
+      method: "GET",
+    }).then((tableData) => {
+      const reservas = tableData.length;
+      const disponibles = 5 - reservas;
+
+      $("#MesasDisponibles").text(disponibles);
+    });
+  </script>
 </html>
