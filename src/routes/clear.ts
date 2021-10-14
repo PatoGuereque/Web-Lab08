@@ -3,7 +3,7 @@ import { clearData } from "../db";
 
 const clearRoute = express();
 
-clearRoute.post("/clearData", (_req, res) => {
+clearRoute.post("/clear", (_req, res) => {
   clearData();
   return res.status(200).json({
     success: true,

@@ -106,7 +106,7 @@
 
     const getWaitlist = () => {
       $.ajax({
-        url: "/api/waitlisttables",
+        url: "/api/waitlist",
         method: "GET",
       }).then((tables) => {
         const waitList = $("#waitList");
