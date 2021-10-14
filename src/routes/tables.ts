@@ -4,9 +4,9 @@ import { reserveTable, getReservations } from "../db";
 
 const tableRoute = express();
 
-tableRoute.get("/tables", (_req, res) => {
-  return res.status(200).json(getReservations());
-});
+tableRoute.get("/tables", (_req, res) =>
+  res.status(200).json(getReservations())
+);
 
 tableRoute.post("/tables", (req, res) => {
   const table: Table = req.body;

@@ -12,18 +12,12 @@ const reserveTable = (table: Table): boolean => {
   if (reservations.length === 5) {
     waitlist.push(table);
     return false;
-  } else {
-    reservations.push(table);
-    return true;
   }
+  reservations.push(table);
+  return true;
 };
 
-const getReservations = (): Table[] => {
-  return reservations;
-};
-
-const getWaitlist = (): Table[] => {
-  return waitlist;
-};
+const getReservations = (): Table[] => reservations;
+const getWaitlist = (): Table[] => waitlist;
 
 export { clearData, reserveTable, getReservations, getWaitlist };

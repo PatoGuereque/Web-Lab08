@@ -1,9 +1,9 @@
 import express from "express";
 import morgan from "morgan";
+import path from "path";
 import tableRoute from "./routes/tables";
 import waitlistRoute from "./routes/waitlist";
 import clearRoute from "./routes/clear";
-import path from "path";
 
 const app = express();
 
