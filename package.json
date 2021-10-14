@@ -1,0 +1,38 @@
+{
+  "name": "web-lab08",
+  "version": "1.0.0",
+  "description": "Laboratorio para la case web",
+  "main": "src/index.ts",
+  "repository": "https://github.com/PatoGuereque/Web-Lab08",
+  "author": "PatoGuereque",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.11.0",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.2.3",
+    "nodemon": "^2.0.13",
+    "prettier": "^2.4.1",
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "dev": "nodemon --config nodemon.json src/index.ts",
+    "postinstall": "husky install && tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint src/**/*"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
